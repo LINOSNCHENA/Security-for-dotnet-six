@@ -3,6 +3,7 @@ package com.iocontrol.IOControl;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import com.iocontrol.IOControl.sim.Sim;
 import com.iocontrol.IOControl.sim.Zamtel;
@@ -20,8 +21,8 @@ public class IoControlApplication {
     Sim sim2 = new Airtel();
     Sim sim3 = new Mtn();
 
-    ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans.xml");
-    Sim sim4 = applicationContext.getBean("sim4", Sim.class); // Extra
+    ApplicationContext phoneContext = new ClassPathXmlApplicationContext("beans.xml");
+    Sim sim4 = phoneContext.getBean("sim4", Sim.class); // Extra
 
 
     sim.calling();
@@ -35,6 +36,7 @@ public class IoControlApplication {
 
     sim4.calling();
     sim4.data();
+    ((AbstractApplicationContext) phoneContext).close();
   }
 
 }
